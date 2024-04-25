@@ -17,18 +17,18 @@ provider "azurerm" {
 
 #Define Name and Location for all resources
 
-# resource "azurerm_resource_group" "gaurav" {
+resource "azurerm_resource_group" "gaurav" {
     
-#     name = "gaurav-resource"
-#     location = "West Europe"
+    name = "gaurav-resource"
+    location = "West Europe"
 
-# }
+}
 
 #Define Name and Location for all resources
 
 resource "azurerm_resource_group" "gaurav" {
     
-    name = "gaurav-resource"
+    name = "app-grp"
     location = "North Europe"
 
 }
@@ -60,9 +60,7 @@ tags = {
 
 }
 
-
 #Create storage group Container
-
 resource "azurerm_storage_container" "gaurav" {
     name = "test"
     storage_account_name = "terraformazure191091"
@@ -70,9 +68,7 @@ resource "azurerm_storage_container" "gaurav" {
   
 }
 
-
 #Create Blob storage
-
 resource "azurerm_storage_blob" "gaurav" {
 
     name = "first"
@@ -81,7 +77,6 @@ resource "azurerm_storage_blob" "gaurav" {
     type = "Block"
   
 }
-
 
 #Create Virtual Network for Private VPC
 
@@ -94,7 +89,6 @@ resource "azurerm_virtual_network" "gaurav" {
   
 }
 
-
 #Create VPC Subnet
 
 resource "azurerm_subnet" "gaurav" {
@@ -105,8 +99,6 @@ resource "azurerm_subnet" "gaurav" {
     address_prefixes = ["10.0.1.0/24"]
 
 }
-
-
 
 #Create Netowork Interface
 
@@ -123,7 +115,6 @@ resource "azurerm_network_interface" "gaurav" {
 
     }
 }
-
 
 #Create Network-Security-Group
 
@@ -202,7 +193,6 @@ resource "azurerm_network_security_group" "gaurav" {
     }
 
 }
-  
 
 #Create Windows VMS
 
