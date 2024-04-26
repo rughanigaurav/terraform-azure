@@ -20,16 +20,10 @@ provider "azurerm" {
 
 #Define Name and Location for all resources
 
-resource "azurerm_resource_group" "gaurav" {
-    
-    name = "gaurav-resource"
-    location = "West Europe"
-
-}
 
 #Define Name and Location for all resources
 
-resource "azurerm_resource_group" "gaurav" {
+resource "azurerm_resource_group" "app-grp" {
     
     name = "app-grp"
     location = "North Europe"
@@ -40,7 +34,7 @@ data "azurerm_subnet" "Subnet1" {
 
     name = "Subnet1"
     virtual_network_name = azurerm_virtual_network.gaurav.name
-    resource_group_name = azurerm_resource_group.gaurav.name
+    resource_group_name = azurerm_resource_group.app-grp.name
   
 }
 
@@ -50,8 +44,8 @@ data "azurerm_subnet" "Subnet1" {
 resource "azurerm_storage_account" "gaurav" {
     
     name = "terraformazure191091"
-    resource_group_name = azurerm_resource_group.gaurav.name
-    location = azurerm_resource_group.gaurav.location
+    resource_group_name = azurerm_resource_group.app-grp.name
+    location = azurerm_resource_group.app-grp.location
     account_tier = "Standard"
     account_replication_type = "GRS"
 
@@ -87,8 +81,8 @@ resource "azurerm_virtual_network" "gaurav" {
 
     name = "VPC-Network"
     address_space = ["10.0.0.0/16"]
-    location = azurerm_resource_group.gaurav.location
-    resource_group_name = azurerm_resource_group.gaurav.name
+    location = azurerm_resource_group.app-grp.location
+    resource_group_name = azurerm_resource_group.app-grp.name
   
 }
 
@@ -97,7 +91,7 @@ resource "azurerm_virtual_network" "gaurav" {
 resource "azurerm_subnet" "gaurav" {
 
     name = "VPC-Subnet1"
-    resource_group_name = azurerm_resource_group.gaurav.name
+    resource_group_name = azurerm_resource_group.app-grp.name
     virtual_network_name = azurerm_virtual_network.gaurav.name
     address_prefixes = ["10.0.1.0/24"]
 
@@ -108,8 +102,8 @@ resource "azurerm_subnet" "gaurav" {
 resource "azurerm_network_interface" "gaurav" {
 
     name = "nic"
-    location = azurerm_resource_group.gaurav.location
-    resource_group_name = azurerm_resource_group.gaurav.name
+    location = azurerm_resource_group.app-grp.location
+    resource_group_name = azurerm_resource_group.app-grp.name
   
     ip_configuration {
       name = "nic"
@@ -124,8 +118,8 @@ resource "azurerm_network_interface" "gaurav" {
 resource "azurerm_network_security_group" "gaurav" {
 
     name = "NSG"
-    location = azurerm_resource_group.gaurav.location
-    resource_group_name = azurerm_resource_group.gaurav.name
+    location = azurerm_resource_group.app-grp.location
+    resource_group_name = azurerm_resource_group.app-grp.name
 
     security_rule {
 
@@ -202,8 +196,8 @@ resource "azurerm_network_security_group" "gaurav" {
 resource "azurerm_windows_virtual_machine" "gaurav" {
 
     name = "Virtual-Machine"
-    resource_group_name = azurerm_resource_group.gaurav.name
-    location = azurerm_resource_group.gaurav.location
+    resource_group_name = azurerm_resource_group.app-grp.name
+    location = azurerm_resource_group.app-grp.location
     size = "Standard_F2"
     admin_username = "gaurav"
     admin_password = "admin@123"
